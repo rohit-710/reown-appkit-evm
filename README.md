@@ -1,4 +1,4 @@
-# Reown: AppKit + Tenderly's Virtual TestNet Example App
+# Reown: AppKit + EVM Example App
 
 1. First, navigate to [cloud.reown.com](https://cloud.reown.com) and create a new project. Upon creating a new project, a project Id will be generated for your new project. Please copy it as you will need it to configure your app.
 
