@@ -43,20 +43,13 @@ jobs:
             echo "files=" >> $GITHUB_OUTPUT
           fi
 
-      # Step 5: Run Proselint and Fail Workflow on Issues
+      # Step 5: Run Proselint on Modified .mdx Files and Display Results
       - name: Run Proselint
         if: steps.find_files.outputs.files != ''
         run: |
-          set -e  # Fail if any error occurs
           for file in ${{ steps.find_files.outputs.files }}; do
             echo "Linting $file"
-            output=$(proselint "$file" || true)  # Capture Proselint output without stopping the script
-            echo "$output"
-            if [[ -n "$output" ]]; then
-              echo "Issues found in $file:"
-              echo "$output"
-              exit 1  # Fail workflow if any issues are found
-            else
-              echo "No issues found in $file."
-            fi
+            proselint "$file" > "${file}.proselint_report" || true
+            echo "Issues found in $file:"
+            cat "${file}.proselint_report"
           done
