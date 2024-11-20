@@ -14,7 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Fetch full history to ensure all branches are available
+          fetch-depth: 0
           ref: ${{ github.head_ref }}
 
       # Step 2: Set up Python environment
@@ -43,24 +43,11 @@ jobs:
             echo "files=" >> $GITHUB_OUTPUT
           fi
 
-      # Step 5: Run Proselint and Fail on Issues
+      # Step 5: Run Proselint on Modified .mdx Files
       - name: Run Proselint
         if: steps.find_files.outputs.files != ''
         run: |
-          set -e
-          issue_found=0  # Track if any issues are detected
           for file in ${{ steps.find_files.outputs.files }}; do
             echo "Linting $file"
-            proselint "$file" > "${file}.proselint_report" || true  # Capture Proselint output
-            if [ -s "${file}.proselint_report" ]; then
-              echo "Issues found in $file:"
-              cat "${file}.proselint_report"
-              issue_found=1  # Mark that issues were detected
-            else
-              echo "No issues found in $file."
-            fi
+            proselint "$file"
           done
-          if [ $issue_found -eq 1 ]; then
-            echo "Proselint detected issues."
-            exit 1  # Fail the workflow
-          fi
