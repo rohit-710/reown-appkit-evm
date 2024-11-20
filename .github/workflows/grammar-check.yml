@@ -43,13 +43,24 @@ jobs:
             echo "files=" >> $GITHUB_OUTPUT
           fi
 
-      # Step 5: Run Proselint on Modified .mdx Files and Display Results
+      # Step 5: Run Proselint on Modified .mdx Files and Fail on Issues
       - name: Run Proselint
         if: steps.find_files.outputs.files != ''
         run: |
+          set -e  # Exit immediately if any error occurs
+          issue_found=0  # Track if any issues are detected
           for file in ${{ steps.find_files.outputs.files }}; do
             echo "Linting $file"
-            proselint "$file" > "${file}.proselint_report" || true
-            echo "Issues found in $file:"
-            cat "${file}.proselint_report"
+            proselint "$file" > "${file}.proselint_report" || true  # Run Proselint and capture output
+            if [ -s "${file}.proselint_report" ]; then
+              echo "Issues found in $file:"
+              cat "${file}.proselint_report"
+              issue_found=1  # Mark issues found
+            else
+              echo "No issues found in $file."
+            fi
           done
+          if [ $issue_found -eq 1 ]; then
+            echo "Please run a grammar check on the contents of your PR using ChatGPT."
+            exit 1  # Fail the workflow if issues are found
+          fi
