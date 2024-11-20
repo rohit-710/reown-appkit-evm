@@ -48,11 +48,15 @@ jobs:
         if: steps.find_files.outputs.files != ''
         run: |
           set -e  # Fail if any error occurs
-          exit_code=0
           for file in ${{ steps.find_files.outputs.files }}; do
             echo "Linting $file"
-            proselint "$file" > "${file}.proselint_report" || exit_code=1
-            echo "Issues found in $file:"
-            cat "${file}.proselint_report"
+            output=$(proselint "$file" || true)  # Capture Proselint output without stopping the script
+            echo "$output"
+            if [[ -n "$output" ]]; then
+              echo "Issues found in $file:"
+              echo "$output"
+              exit 1  # Fail workflow if any issues are found
+            else
+              echo "No issues found in $file."
+            fi
           done
-          exit $exit_code
