@@ -10,11 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the code
+      # Step 1: Checkout the code with full history
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 2  # Ensure enough history is fetched for comparison
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
 
       # Step 2: Set up Python environment
       - name: Set up Python
