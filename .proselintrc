@@ -1,8 +1,0 @@
-{
-  "checks": {
-    "spelling": true,
-    "weasel": true,
-    "grammar": true,
-    "misc": true
-  }
-}
