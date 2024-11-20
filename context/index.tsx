@@ -2,7 +2,7 @@
 
 import { wagmiAdapter, projectId } from '@/config'
 import { createAppKit } from '@reown/appkit/react' 
-import { mainnet, arbitrum, scroll, morphSepolia, berachainTestnetbArtio, mantle } from '@reown/appkit/networks'
+import { mainnet, arbitrum, scroll, morph, berachainTestnetbArtio, mantle, soneiumMinato} from '@reown/appkit/networks'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import React, { type ReactNode } from 'react'
@@ -27,7 +27,7 @@ const metadata = { //this is optional
 const modal = createAppKit({
   adapters: [wagmiAdapter],
   projectId,
-  networks: [mainnet, arbitrum, scroll, morphSepolia, berachainTestnetbArtio, mantle],
+  networks: [mainnet, arbitrum, scroll, morph, berachainTestnetbArtio, mantle, soneiumMinato],
   defaultNetwork: mainnet,
   metadata: metadata,
   features: {
