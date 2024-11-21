@@ -26,6 +26,13 @@ const metadata = { //this is optional
 // Create the modal
 const modal = createAppKit({
   adapters: [wagmiAdapter],
+  chainImages: { // Customize networks' logos
+    5000: '/mantle.png', // <chainId>: 'www.network.com/logo.png'
+    534_352: '/scroll.png',
+    80084: '/berachain.png',
+    2818: '/morph.png',
+    1946: '/soneium.png'
+  },
   projectId,
   networks: [mainnet, arbitrum, scroll, morph, berachainTestnetbArtio, mantle, soneiumMinato],
   defaultNetwork: mainnet,
