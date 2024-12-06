@@ -17,7 +17,7 @@ export default function Home() {
         <div className="grid bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
           <h3 className="text-sm font-semibold bg-gray-100 p-2 text-center">Connect your wallet</h3>
           <div className="flex justify-center items-center p-4">
-          <w3m-button />
+          <appkit-button />
           </div>
         </div> 
         <br></br>
@@ -25,7 +25,7 @@ export default function Home() {
           <div className="grid bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
             <h3 className="text-sm font-semibold bg-gray-100 p-2 text-center">Network selection button</h3>
             <div className="flex justify-center items-center p-4">
-              <w3m-network-button />
+              <appkit-network-button />
             </div>
           </div>
         )}
