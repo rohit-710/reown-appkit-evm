@@ -2,7 +2,7 @@
 
 import { wagmiAdapter, projectId } from '@/config'
 import { createAppKit } from '@reown/appkit/react' 
-import { mainnet, arbitrum, scroll, morph, berachainTestnetbArtio, mantle, soneium, zircuit, rootstock, abstractTestnet} from '@reown/appkit/networks'
+import { mainnet, arbitrum, scroll, morph, berachainTestnetbArtio, mantle, soneium, zircuit, rootstock, abstractTestnet, viction} from '@reown/appkit/networks'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import React, { type ReactNode } from 'react'
@@ -37,7 +37,7 @@ const modal = createAppKit({
     30: '/rootstock.png',
   },
   projectId,
-  networks: [mainnet, arbitrum, scroll, morph, berachainTestnetbArtio, mantle, soneium, zircuit, rootstock, abstractTestnet],
+  networks: [mainnet, arbitrum, scroll, morph, berachainTestnetbArtio, mantle, soneium, zircuit, rootstock, abstractTestnet, viction],
   defaultNetwork: mainnet,
   metadata: metadata,
   features: {
